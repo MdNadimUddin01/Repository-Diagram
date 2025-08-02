@@ -4,8 +4,15 @@ dotenv.config();
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 export const flowChartHandler = async (req, res) => {
-  let { file } = req.body;
+  let { file , repoName } = req.body;
   file = JSON.parse(file);
+
+  const val =
+    "\n" +
+    `📦 ${repoName}\n` +
+    file.map(({ depthIndicator, text }) => depthIndicator + text).join("\n") +
+    "\n"; 
+  
   // console.log("FILE : " , file)
   try {
     const response= await ai.models.generateContent({
@@ -30,12 +37,12 @@ Node Types to Style:
 * Documentation files (.md, .txt, etc.)
 * Git files (.gitignore, etc.)
 Example styling format:
-My git folder structure is: ${file}
+My git folder structure is: ${val}
 Please generate the complete Mermaid code including both the flowchart structure and all the styling definitions to make it look professional and attractive No explanations also not add any comment in the Code, just the code..`,
     });
 
     const result = `${(response.candidates[0].content.parts[0].text).replaceAll("```" , "").replace("mermaid\n" , "")}`;
-    console.log("RES : ", result);
+    // console.log("RES : ", result);
 
     return res.status(200).send({
       message: "Code Recieved",
