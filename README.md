@@ -113,7 +113,7 @@ Ever wondered what a repo looks like before diving into the code?
 └─ vite.config.js
 ```
 
-![Github Folder Tree Preview](/ReadmeAsset/flowchart.png)
+![Github Folder Tree Preview](/ReadmeAsset/treeStructure.png)
 
 
 
