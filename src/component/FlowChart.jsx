@@ -349,7 +349,7 @@ export const FlowChart = ({ mermaidCode, apiError, loading }) => {
 
             {
                 (!mermaidCode || apiError || loading) && <div className="text-red-600 p-5 text-center border border-red-600 rounded-lg bg-red-50">
-                    {apiError ?? isLoading ? "Diagram is Loading ..." : "Enter the github Url"}
+                    {apiError ?? loading ? "Diagram is Loading ..." : "Enter the github Url"}
                 </div>
             }
 

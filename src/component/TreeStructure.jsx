@@ -2,12 +2,11 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Tree } from './Tree'
 import Clipboard from "clipboard"
 
-export function TreeStructure({ treesData, repoName, setTreesData }) {
-    
+export function TreeStructure({ treesData, repoName, setTreesData, apiError }) {
+
     const [copyClicked, setCopyClicked] = useState(false);
-    const buttonRef = useRef();
-    
-    
+    new Clipboard(".clip-button");
+
     return (
 
         <div className='p-5'>
@@ -23,15 +22,14 @@ export function TreeStructure({ treesData, repoName, setTreesData }) {
                 <div className='overflow-scroll relative w-full h-[600px] bg-[#f6f8fa] rounded-[6px]'>
                     <div className='flex justify-between'>
                         <input placeholder='Root Folder Name' value={repoName} onChange={(e) => { }} />
-                        
+
                         <button
-                            ref={buttonRef}
                             className={`clip-button cursor-pointer ${copyClicked ? 'success' : ''} p-2`}
                             data-clipboard-text={
                                 '```\n' +
                                 `📦 ${repoName}\n` +
                                 treesData.map(({ depthIndicator, text }) => depthIndicator + text).join('\n') +
-                                '\n```' 
+                                '\n```'
                             }
                             onClick={() => {
                                 setCopyClicked(true);
@@ -39,7 +37,7 @@ export function TreeStructure({ treesData, repoName, setTreesData }) {
                                     setCopyClicked(false);
                                 }, 1000);
                             }}
-                            
+
                         >
                             {copyClicked ? "✅" : "📋"}
                         </button>
@@ -59,7 +57,7 @@ export function TreeStructure({ treesData, repoName, setTreesData }) {
                 </div>
             </div>
         </div>
-        
+
     )
 }
 
