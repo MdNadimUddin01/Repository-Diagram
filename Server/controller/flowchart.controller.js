@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv"
 dotenv.config();
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 export const flowChartHandler = async (req, res) => {
   let { file , repoName } = req.body;
   file = JSON.parse(file);
