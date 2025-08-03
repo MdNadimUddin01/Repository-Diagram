@@ -16,9 +16,9 @@ function Header() {
             </div>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#" className="text-slate-700 hover:text-slate-900 font-medium transition-colors">Home</a>
-            <a href="#" className="text-slate-700 hover:text-slate-900 font-medium transition-colors">About</a>
-            <a href="#" className="text-slate-700 hover:text-slate-900 font-medium transition-colors">Documentation</a>
+            <button className=" cursor-pointer text-slate-700 hover:text-slate-900 font-medium transition-colors">Home</button>
+            <a href="https://github.com/MdNadimUddin01/Repository-Diagram" className="text-slate-700 hover:text-slate-900 font-medium transition-colors">About</a>
+            <a href="https://github.com/MdNadimUddin01/Repository-Diagram" className="text-slate-700 hover:text-slate-900 font-medium transition-colors">Documentation</a>
           </nav>
         </div>
       </div>
