@@ -90,7 +90,7 @@ export const FlowChart = ({ mermaidCode, apiError, loading }) => {
                     if (chartRef.current) {
                         chartRef.current.innerHTML = `
               <div class="text-red-600 p-5 text-center border border-red-600 rounded-lg bg-red-50">
-                <strong>Error:</strong> Failed to render diagram Please try again
+                <strong>Error:</strong> Failed to render diagram For Better Performance Please Refresh the Page then try again
               </div>
             `;
                     }
