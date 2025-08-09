@@ -61,17 +61,9 @@ export function BodyContent() {
     );
   }
 
-  const findDepthIndicator = async (result) => {
-
-    const resultData = result.map((content, index) => {
-
-      return {
-        ...content, depthIndicator: calculateDepthIndicator(content.id, content.depth, result)
-      }
-    });
-
+  const generateMermaidCode = async (resultData, repo) => {
+    
     const toastId = toast.loading("Diagram Loading ...");
-    const repo = (repoUrl.split('https://github.com/').reverse()[0]).split("/").reverse()[0];
     try {
       const apiResult = await flowchartCodeApi(resultData, repo);
       setMermaidCode(apiResult);
@@ -80,6 +72,21 @@ export function BodyContent() {
       toast.error("Diagram Loading Failed!", { id: toastId });
       setApiError("Diagram Loading Failed! Please try again");
     }
+  }
+
+  const findDepthIndicator = async (result, repoPath) => {
+
+    const resultData = result.map((content, index) => {
+
+      return {
+        ...content, depthIndicator: calculateDepthIndicator(content.id, content.depth, result)
+      }
+    });
+
+    
+    const repo = (repoUrl.split('https://github.com/').reverse()[0]).split("/").reverse()[0];
+
+    await generateMermaidCode(repoPath, repo);
 
     setGtihubTree(resultData);
     setRepoName(repo);
@@ -100,7 +107,11 @@ export function BodyContent() {
       };
     });
 
-    await findDepthIndicator(result);
+    const repoPath = data.tree.map((repo) => repo.path)
+
+    // console.log("DATA : " , repoPath)
+
+    await findDepthIndicator(result , repoPath);
     scrollToSection(contentRef)
     // setGtihubTree(result);
 
@@ -113,7 +124,8 @@ export function BodyContent() {
     const toastId = toast.loading("Repository Tree Structure Loading ...");
     try {
       await apiCall(`https://api.github.com/repos/${repoUrl.split('https://github.com/').reverse()[0]}/git/trees/${branchName}?recursive=1`);
-      toast.success("Repository Tree Structure Loaded!", { id: toastId })
+      toast.success("Repository Tree Structure Loaded!", { id: toastId });
+
     } catch (error) {
       toast.error("Error Occur From Github Side Repository Tree Structure Loading Failed!", { id: toastId });
     }

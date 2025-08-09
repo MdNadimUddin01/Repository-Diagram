@@ -15,5 +15,6 @@ export const flowchartCodeApi = async (file , repoName) => {
         console.log(error);
     }
 
+    console.log(apiResult)
     return apiResult;
 }

@@ -1,7 +1,8 @@
 import { Expand, Shrink } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 
-export const FlowChart = ({ mermaidCode, apiError, loading }) => {
+export const FlowChart = ({mermaidCode ,apiError, loading }) => {
+
     const chartRef = useRef(null);
     const containerRef = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +53,6 @@ export const FlowChart = ({ mermaidCode, apiError, loading }) => {
     };
 
     const initializeAndRender = () => {
-
         if (!mermaidCode) return;
 
         try {
@@ -61,9 +61,18 @@ export const FlowChart = ({ mermaidCode, apiError, loading }) => {
                 theme: 'default',
                 securityLevel: 'loose',
                 flowchart: {
-                    useMaxWidth: false,
+                    useMaxWidth: true,        // ← Changed to true
                     htmlLabels: true,
-                    curve: 'basis'
+                    curve: 'basis',
+                    // Add these for better control
+                    nodeSpacing: 50,         // Space between nodes
+                    rankSpacing: 60,         // Space between ranks/levels
+                    padding: 20              // Diagram padding
+                },
+                // Add theme variables for better spacing
+                themeVariables: {
+                    fontSize: '14px',
+                    fontFamily: 'Arial, sans-serif'
                 }
             });
 
@@ -77,6 +86,11 @@ export const FlowChart = ({ mermaidCode, apiError, loading }) => {
 
                         const svgElement = chartRef.current.querySelector('svg');
                         if (svgElement) {
+                            // Set proper dimensions
+                            svgElement.style.width = '100%';
+                            svgElement.style.height = 'auto';
+                            svgElement.style.maxWidth = 'none';
+
                             svgElement.style.transform = `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`;
                             svgElement.style.transformOrigin = '0 0';
                             svgElement.style.transition = 'transform 0.1s ease-out';
@@ -84,23 +98,20 @@ export const FlowChart = ({ mermaidCode, apiError, loading }) => {
                     }
                 })
                 .catch((error) => {
-                    // console.error(' render error:', error);
                     setIsError(true);
                     setIsLoading(false);
                     if (chartRef.current) {
                         chartRef.current.innerHTML = `
-              <div class="text-red-600 p-5 text-center border border-red-600 rounded-lg bg-red-50">
-                <strong>Error:</strong> Failed to render diagram For Better Performance Please Refresh the Page then try again
-              </div>
-            `;
+                        <div class="text-red-600 p-5 text-center border border-red-600 rounded-lg bg-red-50">
+                            <strong>Error:</strong> Failed to render diagram For Better Performance Please Refresh the Page then try again
+                        </div>
+                    `;
                     }
                 });
         } catch (error) {
             setIsError(true);
             setIsLoading(false);
-            // console.error('Initialize error:', error);
         }
-
     };
 
     const handleZoom = (delta, clientX, clientY) => {
