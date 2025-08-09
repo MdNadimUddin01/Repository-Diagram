@@ -19,62 +19,46 @@ Ever wondered what a repo looks like before diving into the code?
 
 ---
 
-## 🔍 What You Get
+## 🔍 Implementation Details
 
-### 📁 Directory Tree Structure
-```
-📦 Repository-Diagram
-├─ .env.example
-├─ .gitignore
-├─ README.md
-├─ Server
-│  ├─ .env.example
-│  ├─ app.js
-│  ├─ controller
-│  │  └─ flowchart.controller.js
-│  ├─ package-lock.json
-│  ├─ package.json
-│  └─ route
-│     └─ flowchart.route.js
-├─ api.js
-├─ eslint.config.js
-├─ index.html
-├─ package-lock.json
-├─ package.json
-├─ public
-│  └─ vite.svg
-├─ src
-│  ├─ App.css
-│  ├─ App.jsx
-│  ├─ assest
-│  │  └─ logo.png
-│  ├─ component
-│  │  ├─ BodyContent.jsx
-│  │  ├─ FlowChart.jsx
-│  │  ├─ Footer.jsx
-│  │  ├─ Header.jsx
-│  │  ├─ Tree.jsx
-│  │  └─ TreeStructure.jsx
-│  ├─ index.css
-│  └─ main.jsx
-└─ vite.config.js
+This project uses a **Trie (Prefix Tree)** data structure to build and visualize repository structures.
 
-```
+**Steps:**
+1. **Build Trie** — Each file path from the GitHub repo is split by `/` and inserted into the Trie.  
+2. **Traverse Trie** — The Trie is traversed recursively to generate the **Mermaid code** for the flowchart.  
+3. **Render Diagram** — Mermaid.js renders the generated code into an interactive SVG.  
 
-### 🧭 Interactive Flowchart
+**Why Trie?**
+- ⚡ **Fast processing** (pure algorithm, no external calls)  
+- 📂 **Accurate hierarchy representation**  
+- 📜 **Easy formatting for Mermaid.js**  
 
-- 🔎 Zoom, pan, and navigate
-- 📋 Clickable nodes
-- 📥 Export as SVG
-- 🖥️ Fullscreen presentation mode
 
 ---
 
-## 🎬 Live Demo
+## 🎮 How It Works
 
-### ✅ Example Repo: `https://github.com/MdNadimUddin01/Repository-Diagram`
+1. **Paste any GitHub Repo URL**  
+   ```
+   https://github.com/user/repo
+   ```
 
-#### 📂 Auto-generated Tree Structure
+2. *(Optional)* Select a branch (default is `main`)
+
+3. **Click Generate Diagram**  
+   - 🎋 **Tree View** loads immediately  
+   - 🖼️ **Flowchart** renders below
+
+4. **Export or Explore**  
+   - Copy structure  
+   - Download flowchart as SVG  
+   - Fullscreen view available
+
+---
+
+## 🔍 What You Get
+
+### 📁 Directory Tree Structure
 ```
 📦 Repository-Diagram
 ├─ .env.example
@@ -115,12 +99,15 @@ Ever wondered what a repo looks like before diving into the code?
 
 ![Github Folder Tree Preview](/ReadmeAsset/treeStructure.png)
 
+### 🧭 Interactive Flowchart
 
 
-#### 🖼️ Auto-generated Flowchart
-
-![Flowchart Preview](/ReadmeAsset/flowchart.png)
+![Flowchart Preview](/ReadmeAsset/flowchart.png)  
 > _Easily zoom, explore, and export this diagram!_
+- 🔎 Zoom, pan, and navigate
+- 📋 Clickable nodes
+- 📥 Export as SVG
+- 🖥️ Fullscreen presentation mode
 
 ---
 
@@ -149,26 +136,6 @@ Open your browser at: `http://localhost:3000`
 
 ---
 
-## 🎮 How It Works
-
-1. **Paste any GitHub Repo URL**  
-   ```
-   https://github.com/user/repo
-   ```
-
-2. *(Optional)* Select a branch (default is `main`)
-
-3. **Click Generate Diagram**  
-   - 🎋 Tree view loads immediately  
-   - 🖼️ Flowchart renders below
-
-4. **Export or Explore**  
-   - Copy structure  
-   - Download flowchart as SVG  
-   - Fullscreen view available
-
----
-
 ## 🛠️ Tech Stack
 
 | Tech | Description |
@@ -176,18 +143,10 @@ Open your browser at: `http://localhost:3000`
 | ⚛️ React | Frontend for beautiful UI |
 | 🌐 Express | Backend server |
 | 🐙 GitHub API | Fetch repository structure |
+| 🌳 Trie Data Structure | Stores file paths for fast, hierarchical visualization |
 | 📊 Mermaid.js | Diagram rendering (SVG) |
-| 🤖 Gemini AI | Intelligent parsing and analysis |
 
-
-## 🔐 API Keys Setup
-
-
-### 🔮 Gemini API Key
-1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Generate a new key
-3. Add it as `GEMINI_API_KEY` in your `.env`
-
+---
 
 ## 🤝 Contributing
 
@@ -200,8 +159,6 @@ Here's how to get started:
 5. Open a Pull Request
 
 ---
-
-
 
 <div align="center">
 
