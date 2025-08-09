@@ -2,7 +2,6 @@ import express from "express"
 import dotenv from "dotenv"
 import flowchartRoute from "./route/flowchart.route.js";
 import cors from "cors"
-import { giveCode } from "./controller/flowChart.contoller.self.js";
 dotenv.config();
 const app = express();
 
