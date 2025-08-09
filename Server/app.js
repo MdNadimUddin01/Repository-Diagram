@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import flowchartRoute from "./route/flowchart.route.js";
 import cors from "cors"
+import { giveCode } from "./controller/flowChart.contoller.self.js";
 dotenv.config();
 const app = express();
 
@@ -23,4 +24,3 @@ app.use("/api/v1", flowchartRoute);
 app.listen(port, () => {
   console.log(`Server is listeneing at ${port}`);
 });
-
